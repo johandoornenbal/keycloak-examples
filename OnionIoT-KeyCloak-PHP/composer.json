@@ -1,0 +1,21 @@
+{
+    "name": "onioniot/keycloak-php",
+    "description": "Authentication library for interacting with a Keycloak server.",
+    "keywords": ["keycloak", "authentication", "oauth"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Boken Lin",
+            "email": "bl@onion.io"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "OnionIoT\\KeyCloak\\": "src/KeyCloak"
+        }
+    },
+    "require": {
+        "php": ">5.3.0"
+    }
+}

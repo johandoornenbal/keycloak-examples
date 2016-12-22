@@ -1,0 +1,68 @@
+<head>
+    <script src="keycloak.js"></script>
+
+    <script>
+      var keycloak = Keycloak();
+      keycloak.init().success(function (authenticated) {
+        console.log(keycloak);
+        if (authenticated) {
+          keycloak.loadUserInfo().success(function (result) {
+            console.log(result);
+            someUserInfo(keycloak);
+          });
+        } else {
+          displayLoggedOff();
+        }
+      }).error(function () {
+        alert('failed to initialize');
+      });
+    </script>
+
+    <script>
+      var someUserInfo = function (kc) {
+        document.getElementById('someDetails').innerHTML = displaySomeUserInfo(kc);
+        document.getElementById('token').value = kc.token;
+        document.getElementById('tokenDetails').style.visibility = "visible";
+      }
+
+      var displaySomeUserInfo = function (kc) {
+        var message = "<h1>";
+        message += 'Hello ' + kc.userInfo.name;
+        message += "</h1>";
+        message += "<p>";
+        message += "registered email : " + kc.userInfo.email;
+        message += "<br />";
+        message += "registered user name : " + kc.userInfo.preferred_username;
+        message += "</p>";
+        return message;
+      }
+
+      var displayLoggedOff = function () {
+        document.getElementById('someDetails').innerHTML = '<h2>logged off</h2>';
+      }
+
+      function toTokenTest(){
+        location.href= 'http://localhost:8888/keycloaktest/check-token.php?token='+document.getElementById('token').value;
+      }
+
+    </script>
+</head>
+
+<body>
+    <button onclick="javascript:keycloak.login();">
+        Test LOGIN
+    </button>
+    <button onclick="javascript:toTokenTest();">
+        Test CHECK TOKEN
+    </button>
+    <button onclick="javascript:keycloak.logout();">
+        Test LOGOUT
+    </button>
+    <div>
+        <div id='someDetails'></div>
+    </div>
+    <div id="tokenDetails" style="visibility: hidden;">
+        <p>token (as obtained from js keycloak object):</p>
+        <textarea id="token" style="width: 50%; height: 70%;"></textarea>
+    </div>
+</body>

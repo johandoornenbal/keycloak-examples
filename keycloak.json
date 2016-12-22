@@ -1,0 +1,8 @@
+{
+  "realm": "testRealm",
+  "auth-server-url": "http://localhost:8180/auth",
+  "ssl-required": "none",
+  "resource": "keycloaktest",
+  "public-client": true,
+  "use-resource-role-mappings": true
+}
