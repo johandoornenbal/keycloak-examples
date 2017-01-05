@@ -1,6 +1,6 @@
 <?php
 
-function CallAPI($url, $token)
+function CallAPI($url, $token, $usrpwd)
 {
     $curl = curl_init();
 
@@ -9,11 +9,12 @@ function CallAPI($url, $token)
             'Content-Type: application/x-www-form-urlencoded')
     );
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($curl, CURLOPT_USERPWD, "testBackend:21ac95c4-ec8e-484a-81a3-96572e033b25");
+    curl_setopt($curl, CURLOPT_USERPWD, $usrpwd);
     $fields_string = "token=" . $token;
     curl_setopt($curl, CURLOPT_URL, $url);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $fields_string);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
     $result = curl_exec($curl);
 

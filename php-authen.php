@@ -4,6 +4,9 @@
     require_once 'OnionIoT-KeyCloak-PHP/src/KeyCloak/Token.php';
     require_once 'includes/backend-call.php';
 
+    /*
+    * gets url from keycloak.js
+    */
     function Login($username, $password)
     {
         $config = file_get_contents('keycloak.json');
@@ -15,9 +18,14 @@
         return $token;
     }
 
+    /*
+     * gets url from keycloak.js, gets $usrpwd from backendconfig.json
+     */
     function CheckToken($token)
     {
-        $tokenCheckResult = CallAPI("http://localhost:8180/auth/realms/testRealm/protocol/openid-connect/token/introspect", $token);
+        $config = json_decode(file_get_contents('keycloak.json'), TRUE);
+        $usrpwd = json_decode(file_get_contents('backendconfig.json'), TRUE);
+        $tokenCheckResult = CallAPI($config['auth-server-url'] . "/realms/testRealm/protocol/openid-connect/token/introspect", $token, $usrpwd['backend-usrpwd']);
         return $tokenCheckResult;
     }
 

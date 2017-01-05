@@ -30,7 +30,7 @@ if ($authenticated) {
         Not authenticated
     </h2>
     <p>
-        <a href="http://localhost:8888/keycloaktest/php-authen.php">try again</a>
+        <a href="php-authen.php">try again</a>
     </p>
 
     <?php
