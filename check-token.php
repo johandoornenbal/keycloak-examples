@@ -7,7 +7,7 @@
     */
     $config = json_decode(file_get_contents('keycloak.json'), TRUE);
     $usrpwd = json_decode(file_get_contents('backendconfig.json'), TRUE);
-    $tokenCheckResult = CallAPI($config['auth-server-url'] . "/realms/testRealm/protocol/openid-connect/token/introspect", $token, $usrpwd['backend-usrpwd']);
+    $tokenCheckResult = CallAPI($config['auth-server-url'] . "/realms/".$usrpwd['realm']."/protocol/openid-connect/token/introspect", $token, $usrpwd['backend-usrpwd']);
 
 ?>
 
